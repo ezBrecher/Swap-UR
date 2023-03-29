@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Swap-UR</title>
+  </head>
+  <body>
+    <nav>
+      <a href="{{ url_for('main') }}">Main</a>
+      <a href="{{ url_for('item') }}">Item</a>
+      <a href="{{ url_for('listing') }}">Listing</a>
+      <a href="{{ url_for('profile') }}">Profile</a>
+      <a href="{{ url_for('message') }}">Message</a>
+      <a href="{{ url_for('confirmation') }}">Confirmation</a>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+  </body>
+</html>
