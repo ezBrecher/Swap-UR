@@ -6,6 +6,8 @@ this is a prototype for Swap UR, an item exchange platform for the U of R studen
 Weekly Project updates:
 
 week of 3/20: nothing 
+
 week of 3/27: 
-  Created a plan for implementing required website infrastructure
-  
+  Created a plan for implementing required website infrastructure.
+  Created a general design for the database implementation
+  Created navigation to template pages in flask
