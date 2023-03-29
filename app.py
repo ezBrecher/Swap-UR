@@ -18,9 +18,16 @@ class Item(db.Model):
     price = db.Column(db.Double(2), nullable=False)
     condition = db.Column(db.String(50))
     listing_datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    sold = db.Column(db.Boolean)
+    exchange_pref = db.Column(db.Integer) ## or string
+    payment_pref = db.Column(db.String)
 
 class User(db.Model):
     u_id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
+    screen_name = db.Column(db.String(80), nullable=False)
+    email = db.Column(db.String(25), nullable=False, unique=True)
+    password = db.Column(db.String(80), nullable=False)
+    rating = db.Column(db.Integer)
 
 @app.route('/')
 def home():
