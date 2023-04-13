@@ -41,8 +41,9 @@ class Item(db.Model):
 #     password = PasswordField('Password', validators=[DataRequired()])
 #     submit = SubmitField('Login')
     
+
 @app.route('/')
-def home():
+def main():
     return render_template('main.html')
 
 @app.route('/item')
@@ -64,6 +65,10 @@ def message():
 @app.route('/confirmation')
 def confirmation():
     return render_template('confirmation.html')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
 
 
 if __name__ == '__main__':
