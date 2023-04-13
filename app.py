@@ -9,6 +9,8 @@ from wtforms.validators import DataRequired, Length
 app = Flask(__name__)
 ##app.config['SQL_URI']
 db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
+
 
 ## database declarations
 class Item(db.Model):
