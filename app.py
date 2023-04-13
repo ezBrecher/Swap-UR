@@ -40,6 +40,10 @@ class LoginForm(FlaskForm):
 
 @app.route('/')
 def home():
+    return render_template('base.html')
+
+@app.route('/main')
+def item():
     return render_template('main.html')
 
 @app.route('/item')
