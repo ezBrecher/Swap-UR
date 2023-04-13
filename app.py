@@ -35,6 +35,7 @@ class Item(db.Model):
 # db.ForeignKey('User.u_id'),
 
 
+
 # class LoginForm(FlaskForm):
 #     username = StringField('Username', validators=[DataRequired(), Length(min=4, max=25)])
 #     password = PasswordField('Password', validators=[DataRequired()])
@@ -69,3 +70,4 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
