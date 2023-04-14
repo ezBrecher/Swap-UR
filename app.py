@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -46,10 +46,6 @@ def listing():
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
-
-@app.route('/message')
-def message():
-    return render_template('message.html')
 
 @app.route('/confirmation')
 def confirmation():
