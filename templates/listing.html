@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,8 +7,16 @@
   <title>Swap-UR</title>
 </head>
 <body>
-
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="img_1">
+    <input type="file" name="img_2">
+    <input type="file" name="img_3">
+    <input type="file" name="img_4">
+    <input type="file" name="img_5">
+    <input type="submit" value="Upload">
+  </form>
   <nav>
       <a href="{{ url_for('main') }}">back</a>
   </nav>
 </body>
+{% endblock %}
