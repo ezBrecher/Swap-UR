@@ -4,8 +4,7 @@ from datetime import datetime
 # from wtforms import StringField, PasswordField, SubmitField
 # from wtforms.validators import DataRequired, Length
 # from flask_wtf import FlaskForm
-
-# from sqlalchemy_imageattach.entity import Image, image_attachment
+from flask import Flask, request
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -28,12 +27,18 @@ class Item(db.Model):
     category_1 = db.Column(db.String(50), nullable=False)
     category_2 = db.Column(db.String(50))
     category_3 = db.Column(db.String(50))
+    img_1 = db.Column(db.LargeBinary)
+    img_2 = db.Column(db.LargeBinary)
+    img_3 = db.Column(db.LargeBinary)
+    img_4 = db.Column(db.LargeBinary)
+    img_5 = db.Column(db.LargeBinary)
     price = db.Column(db.Float(2), nullable=False)
     condition = db.Column(db.String(50))
     listing_datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     sold = db.Column(db.Boolean)
     exchange_pref = db.Column(db.Integer) ## or string
     payment_pref = db.Column(db.String)
+
 # db.ForeignKey('User.u_id'),
 
 
@@ -52,8 +57,14 @@ def main():
 def item():
     return render_template('item.html')
 
-@app.route('/listing')
+@app.route('/listing', methods=['POST'])
 def listing():
+    img1 = request.files['img_1']
+    img2 = request.files['img_2']
+    img3 = request.files['img_3']
+    img4 = request.files['img_4']
+    img5 = request.files['img_5']
+    new_item = Item(img_1=img1)
     return render_template('listing.html')
 
 @app.route('/profile')
