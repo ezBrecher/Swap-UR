@@ -1,4 +1,8 @@
-body {}
+body {
+	background: #000000;
+	color: #ffffff; 
+	font-family: "Tahoma", sans-serif;
+}
 
 header {}
 

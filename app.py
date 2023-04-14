@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+# from sqlalchemy_imageattach.entity import Image, image_attachment
+
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
@@ -14,7 +16,7 @@ class User(db.Model):
     email = db.Column(db.String(25), nullable=False, unique=True)
     password = db.Column(db.String(80), nullable=False)
     rating = db.Column(db.Integer)
-    
+
 class Item(db.Model):
     i_id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     name = db.Column(db.String(100), nullable=False)
@@ -29,7 +31,6 @@ class Item(db.Model):
     sold = db.Column(db.Boolean)
     exchange_pref = db.Column(db.Integer) ## or string
     payment_pref = db.Column(db.String)
-    
 
 @app.route('/')
 def main():
@@ -71,4 +72,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
