@@ -34,7 +34,7 @@ class Item(db.Model):
     img_5 = db.Column(db.LargeBinary)
     price = db.Column(db.Float(2), nullable=False)
     condition = db.Column(db.String(50))
-    listing_datetime = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    listing_datetime = db.Column(db.DateTime, default=datetime.utcnow)
     sold = db.Column(db.Boolean)
     exchange_pref = db.Column(db.Integer) ## or string
     payment_pref = db.Column(db.String)
@@ -57,14 +57,18 @@ def main():
 def item():
     return render_template('item.html')
 
-@app.route('/listing', methods=['POST'])
+@app.route('/listing',methods=['POST'])
 def listing():
     img1 = request.files['img_1']
     img2 = request.files['img_2']
     img3 = request.files['img_3']
     img4 = request.files['img_4']
     img5 = request.files['img_5']
-    new_item = Item(img_1=img1)
+    new_item = Item(img_1=img1,
+                    img_2=img2,
+                    img_3=img3,
+                    img_4=img4,
+                    img_5=img5)
     return render_template('listing.html')
 
 @app.route('/profile')

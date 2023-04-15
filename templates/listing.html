@@ -8,12 +8,19 @@
 </head>
 <body>
   <form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" value="item">
+    <input type="text" name="description" value="item description">
+    <input type="text" name="category_1">
+    <input type="text" name="category_2">
+    <input type="text" name="category_3">
     <input type="file" name="img_1">
     <input type="file" name="img_2">
     <input type="file" name="img_3">
     <input type="file" name="img_4">
     <input type="file" name="img_5">
-    <input type="submit" value="Upload">
+    <input type="number" name="price" value="0.00">
+    <input type="text" name="condition">
+    <input type="submit" value="Upload"x>
   </form>
   <nav>
       <a href="{{ url_for('main') }}">back</a>
