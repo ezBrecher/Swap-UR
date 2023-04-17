@@ -4,11 +4,12 @@ from datetime import datetime
 # from wtforms import StringField, PasswordField, SubmitField
 # from wtforms.validators import DataRequired, Length
 # from flask_wtf import FlaskForm
-from flask import Flask, request
+from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 ## database declarations
@@ -24,9 +25,7 @@ class Item(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200))
     seller = db.Column(db.Integer, nullable = False)
-    category_1 = db.Column(db.String(50), nullable=False)
-    category_2 = db.Column(db.String(50))
-    category_3 = db.Column(db.String(50))
+    item_category = db.Column(db.String(50), nullable=False)
     img_1 = db.Column(db.LargeBinary)
     img_2 = db.Column(db.LargeBinary)
     img_3 = db.Column(db.LargeBinary)
@@ -57,19 +56,26 @@ def main():
 def item():
     return render_template('item.html')
 
-@app.route('/listing',methods=['POST'])
+@app.route('/listing', methods=["POST","GET"])
 def listing():
-    img1 = request.files['img_1']
-    img2 = request.files['img_2']
-    img3 = request.files['img_3']
-    img4 = request.files['img_4']
-    img5 = request.files['img_5']
-    new_item = Item(img_1=img1,
-                    img_2=img2,
-                    img_3=img3,
-                    img_4=img4,
-                    img_5=img5)
-    return render_template('listing.html')
+    if request.method == "POST":
+        input = request.form
+        new_item = Item(name=input["name"],
+                        description=input["description"],
+                        item_category=input["item_category"],
+                        img_1=input["img_1"],
+                        img_2=input["img_2"],
+                        img_3=input["img_3"],
+                        img_4=input["img_4"],
+                        img_5=input["img_5"],
+                        price=input["price"],
+                        condition=input["condition"])
+        session.add(new_item)
+        session.commit()
+        session.close()
+        return redirect(url_for("Main"))
+    else:
+        return redirect(url_for("listing"))
 
 @app.route('/profile')
 def profile():
