@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
 db = SQLAlchemy(app)
 
 ## database declarations
@@ -70,12 +71,12 @@ def listing():
                         img_5=input["img_5"],
                         price=input["price"],
                         condition=input["condition"])
-        session.add(new_item)
-        session.commit()
-        session.close()
-        return redirect(url_for("Main"))
+        db.add(new_item)
+        db.commit()
+        flash("successfully added item")
+        return redirect(url_for("item"))
     else:
-        return redirect(url_for("listing"))
+        return render_template('listing.html')
 
 @app.route('/profile')
 def profile():
