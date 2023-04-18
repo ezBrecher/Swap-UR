@@ -45,7 +45,8 @@ def main():
 
 @app.route('/item')
 def item():
-    return render_template('item.html')
+    #pass item somehow
+    return render_template('item1.html', item=item)
 
 @app.route('/listing', methods=["POST","GET"])
 def listing():
