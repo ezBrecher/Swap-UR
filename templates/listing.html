@@ -7,13 +7,47 @@
   <title>Swap-UR</title>
 </head>
 <body>
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <input type="file" name="img_1">
-    <input type="file" name="img_2">
-    <input type="file" name="img_3">
-    <input type="file" name="img_4">
-    <input type="file" name="img_5">
-    <input type="submit" value="Upload">
+
+  <form action="/upload" method="POST">
+    <label for="name"> Item Name: </label>
+    <input type="text" name="name">
+    <br></br>
+
+    <label for="description">Item Description: </label>
+    <textarea name="description" rows="10" cols="30"></textarea>
+    <br></br>
+
+    <label for="item_category">Item Category:</label>
+    <select id="item_category" name="item_category">
+      <option value="decor">Decor</option>
+      <option value="bathroom">Bathroom</option>
+      <option value="clothing">Clothing</option>
+      <option value="furniature">Furniature</option>
+      <option value="appliance">Appliance</option>
+      <option value="kitchen">Kitchen</option>
+      <option value="other">Other</option>
+    </select>
+    <br>
+
+    <h3> Item Images </h3>
+    <input type="file" name="img_1"> <br>
+    <input type="file" name="img_2"> <br>
+    <input type="file" name="img_3"> <br>
+    <input type="file" name="img_4"> <br>
+    <input type="file" name="img_5"> <br></br>
+
+    <label for="number">Price (0 if free)</label>
+    <input type="number" name="price" value="0.00"> <br>
+
+    <select id="condition" name="condition">
+      <option value="brand_new">Brand New</option>
+      <option value="like_new">Like New</option>
+      <option value="very_good">Very Good</option>
+      <option value="good">Good</option>
+      <option value="acceptable">Acceptable</option>
+      <option value="damaged">Damaged</option>
+    </select> <br>
+    <input type="submit" value="submit">
   </form>
   <nav>
       <a href="{{ url_for('main') }}">back</a>
