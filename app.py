@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect, session, url_for
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
 db = SQLAlchemy(app)
 
 ## database declarations
@@ -21,17 +23,14 @@ class Item(db.Model):
     i_id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200))
-    seller = db.Column(db.Integer, db.ForeignKey('User.u_id'), nullable = False)
-    category_1 = db.Column(db.String(50), nullable=False)
-    category_2 = db.Column(db.String(50))
-    category_3 = db.Column(db.String(50))
     seller = db.Column(db.Integer, nullable = False)
-    item_category = db.Column(db.String(50), nullable=False)
-    img_1 = db.Column(db.LargeBinary)
-    img_2 = db.Column(db.LargeBinary)
-    img_3 = db.Column(db.LargeBinary)
-    img_4 = db.Column(db.LargeBinary)
-    img_5 = db.Column(db.LargeBinary)
+    item_category=db.Column(db.String(255))
+    img_1_name = db.Column(db.String(255))
+    img_1_path = db.Column(db.String(255))
+    # img_2 = db.Column(db.String(255))
+    # img_3 = db.Column(db.String(255))
+    # img_4 = db.Column(db.String(255))
+    # img_5 = db.Column(db.String(255))
     price = db.Column(db.Float(2), nullable=False)
     condition = db.Column(db.String(50))
     listing_datetime = db.Column(db.DateTime, default=datetime.utcnow)
@@ -52,18 +51,23 @@ def item():
 def listing():
     if request.method == "POST":
         input = request.form
+        im1 = request.files['img_1']
+        im1_name = secure_filename(im1.filename)
+        im1_path = os.path.join(app.config['UPLOAD_FOLDER'], im1_name)
+        im1.save(im1_path)
         new_item = Item(name=input["name"],
                         description=input["description"],
                         item_category=input["item_category"],
-                        img_1=input["img_1"],
-                        img_2=input["img_2"],
-                        img_3=input["img_3"],
-                        img_4=input["img_4"],
-                        img_5=input["img_5"],
+                        img_1_name=im1_name,
+                        img_1_path=im1_path,
+                        # img_2=input["img_2"],
+                        # img_3=input["img_3"],
+                        # img_4=input["img_4"],
+                        # img_5=input["img_5"],
                         price=input["price"],
                         condition=input["condition"])
-        db.add(new_item)
-        db.commit()
+        db.session.add(new_item)
+        db.session.commit()
         flash("successfully added item")
         return redirect(url_for("item"))
     else:
