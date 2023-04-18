@@ -24,19 +24,22 @@ class Item(db.Model):
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(200))
     seller = db.Column(db.Integer, nullable = False)
-    item_category=db.Column(db.String(255))
+    item_category = db.Column(db.String(255))
     img_1_name = db.Column(db.String(255))
     img_1_path = db.Column(db.String(255))
-    # img_2 = db.Column(db.String(255))
-    # img_3 = db.Column(db.String(255))
-    # img_4 = db.Column(db.String(255))
-    # img_5 = db.Column(db.String(255))
+    img_2_name = db.Column(db.String(255))
+    img_2_path = db.Column(db.String(255))
+    img_3_name = db.Column(db.String(255))
+    img_3_path = db.Column(db.String(255))
+    img_4_name = db.Column(db.String(255))
+    img_4_path = db.Column(db.String(255))
+    img_5_name = db.Column(db.String(255))
+    img_5_path = db.Column(db.String(255))
     price = db.Column(db.Float(2), nullable=False)
     condition = db.Column(db.String(50))
     listing_datetime = db.Column(db.DateTime, default=datetime.utcnow)
     sold = db.Column(db.Boolean)
     exchange_pref = db.Column(db.Integer) ## or string
-    payment_pref = db.Column(db.String)
 
 @app.route('/')
 def main():
@@ -51,19 +54,55 @@ def item():
 def listing():
     if request.method == "POST":
         input = request.form
+
         im1 = request.files['img_1']
-        im1_name = secure_filename(im1.filename)
-        im1_path = os.path.join(app.config['UPLOAD_FOLDER'], im1_name)
-        im1.save(im1_path)
+        im1.seek(0, os.SEEK_END)
+        if im1.file.tell() != 0:
+            im1_name = secure_filename(im1.filename)
+            im1_path = os.path.join(app.config['UPLOAD_FOLDER'], im1_name)
+            im1.save(im1_path)
+
+        im2 = request.files['img_2']
+        im2.seek(0, os.SEEK_END)
+        if im2.file.tell() != 0:
+            im2_name = secure_filename(im2.filename)
+            im2_path = os.path.join(app.config['UPLOAD_FOLDER'], im2_name)
+            im2.save(im2_path)
+
+        im3 = request.files['img_3']
+        im3.seek(0, os.SEEK_END)
+        if im3.file.tell() != 0:
+            im3_name = secure_filename(im3.filename)
+            im3_path = os.path.join(app.config['UPLOAD_FOLDER'], im3_name)
+            im3.save(im3_path)
+
+        im4 = request.files['img_4']
+        im4.seek(0, os.SEEK_END)
+        if im4.file.tell() != 0:
+            im4_name = secure_filename(im4.filename)
+            im4_path = os.path.join(app.config['UPLOAD_FOLDER'], im4_name)
+            im4.save(im4_path)
+
+        im5 = request.files['img_5']
+        im5.seek(0, os.SEEK_END)
+        if im5.file.tell() != 0:
+            im5_name = secure_filename(im5.filename)
+            im5_path = os.path.join(app.config['UPLOAD_FOLDER'], im5_name)
+            im5.save(im5_path)
+
         new_item = Item(name=input["name"],
                         description=input["description"],
                         item_category=input["item_category"],
                         img_1_name=im1_name,
                         img_1_path=im1_path,
-                        # img_2=input["img_2"],
-                        # img_3=input["img_3"],
-                        # img_4=input["img_4"],
-                        # img_5=input["img_5"],
+                        img_2_name=im2_name,
+                        img_2_path=im2_path,
+                        img_3_name=im3_name,
+                        img_3_path=im3_path,
+                        img_4_name=im4_name,
+                        img_4_path=im4_path,
+                        img_5_name=im5_name,
+                        img_5_path=im5_path,
                         price=input["price"],
                         condition=input["condition"])
         db.session.add(new_item)
