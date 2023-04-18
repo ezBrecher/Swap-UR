@@ -1,5 +1,48 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
-  <h1>Main Page</h1>
+    <h1>Main Page</h1>
+    <form method="POST">
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="">All</option>
+            <option value="decor">Decor</option>
+            <option value="bathroom">Bathroom</option>
+            <option value="clothing">Clothing</option>
+            <option value="furniature">Furniature</option>
+            <option value="appliance">Appliance</option>
+            <option value="kitchen">Kitchen</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="min_price">Min Price:</label>
+        <input type="number" name="min_price" id="min_price" step="0.01">
+
+        <label for="max_price">Max Price:</label>
+        <input type="number" name="max_price" id="max_price" step="0.01">
+
+        <label>Condition:</label>
+        <input type="checkbox" name="condition" value="Brand_new" id="brand_new"><label for="brand_new">Brand New</label>
+        <input type="checkbox" name="condition" value="Like_new" id="like_new"><label for="like_new">Like New</label>
+        <input type="checkbox" name="condition" value="Very_good" id="very_good"><label for="very_good">Very Good</label>
+        <input type="checkbox" name="condition" value="Good" id="good"><label for="good">Good</label>
+        <input type="checkbox" name="condition" value="Acceptable" id="acceptable"><label for="acceptable">Acceptable</label>
+        <input type="checkbox" name="condition" value="Damaged" id="damaged"><label for="damaged">Damaged</label>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    {% if items %}
+        {% for item in items %}
+            <div class="item">
+                <img src="{{ url_for('static', filename='images/' + item.img_1) }}" alt="{{ item.name }}">
+                <h2>{{ item.name }}</h2>
+                <p>{{ item.description }}</p>
+                <p>{{ item.price }}</p>
+                <a href="{{ url_for('item.html', id=item.i_id) }}">Get Now</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No items found.</p>
+    {% endif %}
 {% endblock %}
