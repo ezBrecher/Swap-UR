@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <form action="/upload" method="POST">
+  <form method="POST" action="" enctype="multipart/form-data">
     <label for="name"> Item Name: </label>
     <input type="text" name="name">
     <br></br>
@@ -30,14 +30,14 @@
     <br>
 
     <h3> Item Images </h3>
-    <input type="file" name="img_1"> <br>
-    <input type="file" name="img_2"> <br>
-    <input type="file" name="img_3"> <br>
-    <input type="file" name="img_4"> <br>
-    <input type="file" name="img_5"> <br></br>
+    <input type="file" name="img_1" id="img_1"> <br>
+    <input type="file" name="img_2" id="img_2"> <br>
+    <input type="file" name="img_3" id="img_3"> <br>
+    <input type="file" name="img_4" id="img_4"> <br>
+    <input type="file" name="img_5" id="img_5"> <br></br>
 
-    <label for="number">Price (0 if free)</label>
-    <input type="number" name="price" value="0.00"> <br>
+    <label for="number">Price</label>
+    <input type="double" name="price" value="0.00"> <br>
 
     <select id="condition" name="condition">
       <option value="brand_new">Brand New</option>
@@ -46,6 +46,11 @@
       <option value="good">Good</option>
       <option value="acceptable">Acceptable</option>
       <option value="damaged">Damaged</option>
+    </select> <br>
+
+    <select id="exchange_pref" name="exchange_pref">
+      <option value="in_person">In Person / Synchronous</option>
+      <option value="drop_off">Dropoff</option>
     </select> <br>
     <input type="submit" value="submit">
   </form>
