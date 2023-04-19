@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
@@ -21,9 +21,9 @@ class User(db.Model):
 
 class Item(db.Model):
     i_id = db.Column(db.Integer, primary_key=True, unique=True, nullable=False)
-    name = db.Column(db.String(100), nullable=False)
+    name = db.Column(db.String(100))
     description = db.Column(db.String(200))
-    seller = db.Column(db.Integer, nullable = False)
+    seller = db.Column(db.Integer)
     item_category = db.Column(db.String(255))
     img_1_name = db.Column(db.String(255))
     img_1_path = db.Column(db.String(255))
@@ -35,7 +35,7 @@ class Item(db.Model):
     img_4_path = db.Column(db.String(255))
     img_5_name = db.Column(db.String(255))
     img_5_path = db.Column(db.String(255))
-    price = db.Column(db.Float(2), nullable=False)
+    price = db.Column(db.Float(2), default=0)
     condition = db.Column(db.String(50))
     listing_datetime = db.Column(db.DateTime, default=datetime.utcnow)
     sold = db.Column(db.Boolean)
@@ -50,42 +50,54 @@ def item():
     #pass item somehow
     return render_template('item1.html', item=item)
 
-@app.route('/listing', methods=["POST","GET"])
+@app.route('/listing', methods=['POST','GET'])
 def listing():
-    if request.method == "POST":
+    if request.method == 'POST':
         input = request.form
+
+        im1_name = None
+        im2_name = None
+        im3_name = None
+        im4_name = None
+        im5_name = None
+
+        im1_path = None
+        im2_path = None
+        im3_path = None
+        im4_path = None
+        im5_path = None
 
         im1 = request.files['img_1']
         im1.seek(0, os.SEEK_END)
-        if im1.file.tell() != 0:
+        if im1.tell() != 0:
             im1_name = secure_filename(im1.filename)
             im1_path = os.path.join(app.config['UPLOAD_FOLDER'], im1_name)
             im1.save(im1_path)
 
         im2 = request.files['img_2']
         im2.seek(0, os.SEEK_END)
-        if im2.file.tell() != 0:
+        if im2.tell() != 0:
             im2_name = secure_filename(im2.filename)
             im2_path = os.path.join(app.config['UPLOAD_FOLDER'], im2_name)
             im2.save(im2_path)
 
         im3 = request.files['img_3']
         im3.seek(0, os.SEEK_END)
-        if im3.file.tell() != 0:
+        if im3.tell() != 0:
             im3_name = secure_filename(im3.filename)
             im3_path = os.path.join(app.config['UPLOAD_FOLDER'], im3_name)
             im3.save(im3_path)
 
         im4 = request.files['img_4']
         im4.seek(0, os.SEEK_END)
-        if im4.file.tell() != 0:
+        if im4.tell() != 0:
             im4_name = secure_filename(im4.filename)
             im4_path = os.path.join(app.config['UPLOAD_FOLDER'], im4_name)
             im4.save(im4_path)
 
         im5 = request.files['img_5']
         im5.seek(0, os.SEEK_END)
-        if im5.file.tell() != 0:
+        if im5.tell() != 0:
             im5_name = secure_filename(im5.filename)
             im5_path = os.path.join(app.config['UPLOAD_FOLDER'], im5_name)
             im5.save(im5_path)
