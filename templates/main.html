@@ -36,9 +36,10 @@
   <h1>Swap-UR</h1>
   <ul>
     {% for item in items %}
+
     <li>
       <a href="{{ url_for('item', item_id=item.i_id) }}">
-        <img src="{{ url_for('static', filename='uploads/item.jpg') }}" alt="{{ item.name }}">
+        <img src="{{ url_for('static', filename='{{ item.img_1_path }}') }}" alt="{{ item.name }}">
         <h2>{{ item.name }}</h2>
         <p>{{ item.description }}</p>
         <p>Price: ${{ item.price }}</p>
