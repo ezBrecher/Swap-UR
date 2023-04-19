@@ -136,7 +136,7 @@ def listing():
         db.session.add(new_item)
         db.session.commit()
         flash("successfully added item")
-        return redirect(url_for("item"))
+        return redirect(url_for("item") )
     else:
         return render_template('listing.html')
 
