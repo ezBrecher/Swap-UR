@@ -63,6 +63,7 @@ def main():
 @app.route('/item')
 def item():
     #pass item somehow
+    item = Item.query.first()
     return render_template('item1.html', item=item)
 
 @app.route('/listing', methods=['POST','GET'])
@@ -153,7 +154,7 @@ def confirmation():
             return render_template('confirmation.html', item=item)
         else:
             flash("item hasn't been sold yet")
-            return render_template('item.html', item=item)
+            return render_template('item1.html', item=item)
     else:
         return 'Item not found'
 

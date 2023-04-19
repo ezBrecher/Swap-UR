@@ -88,65 +88,22 @@ nav {
 	background-color: #0062cc;
   }
 
-  filter {
-	display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid black;
-}
-  
-  select, button {
-	padding: 5px;
-	border-radius: 5px;
-	border: none;
-	background-color: #ffffff;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  select:focus, button:focus {
-	outline: none;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  .square-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
   }
 
-  .item-grid {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	margin: 20px;
+  .rating-display i {
+	font-size: 20px; /* Set the size of the star icons */
+	color: #ddd; /* Set the default color for empty stars */
+	margin: auto;
+	text-align: center;
   }
   
-  .item-card {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	width: 250px;
-	height: 350px;
-	margin: 20px;
-	padding: 20px;
-	border: 1px solid #ddd;
-	border-radius: 5px;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  .rating-display i.filled {
+	color: #ffdd00; /* Set the color for filled stars */
+	margin: auto;
+	text-align: center;
   }
-  
-  .item-card img {
-	max-width: 100%;
-	max-height: 200px;
-	margin-bottom: 10px;
-  }
-  
-  .item-card h2 {
-	font-size: 16px;
-	font-weight: bold;
-	margin: 10px 0;
-  }
-  
-  .item-card p {
-	font-size: 14px;
-	line-height: 1.2;
-	margin: 10px 0;
-  }
-  
