@@ -154,7 +154,7 @@ def confirmation():
             return render_template('confirmation.html', item=item)
         else:
             flash("item hasn't been sold yet")
-            return render_template('item.html', item=item)
+            return render_template('item1.html', item=item)
     else:
         return 'Item not found'
 

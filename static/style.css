@@ -87,3 +87,23 @@ nav {
   input[type="submit"]:active {
 	background-color: #0062cc;
   }
+
+  .square-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+
+  .rating-display i {
+	font-size: 20px; /* Set the size of the star icons */
+	color: #ddd; /* Set the default color for empty stars */
+	margin: auto;
+	text-align: center;
+  }
+  
+  .rating-display i.filled {
+	color: #ffdd00; /* Set the color for filled stars */
+	margin: auto;
+	text-align: center;
+  }
