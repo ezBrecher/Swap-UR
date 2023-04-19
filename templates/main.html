@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <nav>
+<h1>Swap-UR</h1>
+  <filter>
     <form method="get" action="/">
       <select name="category">
         <option value="">All Categories</option>
@@ -11,11 +12,10 @@
         <option value="furniature">Furniature</option>
         <option value="appliance">Appliance</option>
         <option value="kitchen">Kitchen</option>
-        <option value="school-supplies">School Supplies</option>
         <option value="other">Other</option>
       </select>
       <select name="condition">
-        <option value="">All Conditions</option>
+        <option value="">All Item Conditions</option>
         <option value="brand_new">Brand New</option>
         <option value="like_new">Like New</option>
         <option value="very_good">Very Good</option>
@@ -24,18 +24,25 @@
         <option value="damaged">Damaged</option>
       </select>
       <select name="price">
-        <option value="">All Prices</option>
+        <option value="">All Prices Range</option>
         <option value="0-10">$0 - $10</option>
         <option value="10-50">$10 - $50</option>
         <option value="50-100">$50 - $100</option>
         <option value="100+">$100+</option>
       </select>
+      <select name="payment">
+        <option value="">All Payment Types</option>
+        <option value="cash">Cash</option>
+        <option value="paypal">Paypal</option>
+        <option value="venmo">Venmo</option>
+      </select>
       <button type="submit">Filter</button>
     </form>
-  </nav>
-  <h1>Swap-UR</h1>
+</filter>
+<div class="item-grid">
   <ul>
     {% for item in items %}
+    <div class="item-card">
     <li>
       <a href="{{ url_for('item', item_id=item.i_id) }}">
         <img src="{{ url_for('static', filename=item.img_1_path) }}" alt="{{ item.name }}">
@@ -45,7 +52,9 @@
         <p>Condition: {{ item.condition }}</p>
         <p>Listed on: {{ item.listing_datetime.strftime('%Y-%m-%d') }}</p>
       </a>
+    </div>
     </li>
     {% endfor %}
   </ul>
+</div>
 {% endblock %}
