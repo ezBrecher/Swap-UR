@@ -48,6 +48,7 @@ def main():
 @app.route('/item')
 def item():
     #pass item somehow
+    item = Item.query.first()
     return render_template('item1.html', item=item)
 
 @app.route('/listing', methods=['POST','GET'])
