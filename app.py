@@ -43,7 +43,22 @@ class Item(db.Model):
 
 @app.route('/')
 def main():
-    return render_template('main.html')
+    category = request.args.get('category', '')
+    condition = request.args.get('condition', '')
+    price_range = request.args.get('price', '')
+    items = Item.query.all()
+
+    if category:
+        items = [item for item in items if item.item_category == category]
+    if condition:
+        items = [item for item in items if item.condition == condition]
+    if price_range:
+        prices = price_range.split('-')
+        if len(prices) == 2:
+            min_price, max_price = float(prices[0]), float(prices[1])
+            items = [item for item in items if min_price <= item.price <= max_price]
+
+    return render_template('main.html', items=items)
 
 @app.route('/item')
 def item():
@@ -117,7 +132,8 @@ def listing():
                         img_5_name=im5_name,
                         img_5_path=im5_path,
                         price=input["price"],
-                        condition=input["condition"])
+                        condition=input["condition"],
+                        sold=False)
         db.session.add(new_item)
         db.session.commit()
         flash("successfully added item")
@@ -131,7 +147,16 @@ def profile():
 
 @app.route('/confirmation')
 def confirmation():
-    return render_template('confirmation.html')
+    id = 2
+    item = Item.query.filter_by(i_id=id).first()
+    if item:
+        if item.sold == True:
+            return render_template('confirmation.html', item=item)
+        else:
+            flash("item hasn't been sold yet")
+            return render_template('item.html', item=item)
+    else:
+        return 'Item not found'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

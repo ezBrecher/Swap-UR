@@ -1,48 +1,60 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
-    <h1>Main Page</h1>
-    <form method="POST">
-        <label for="category">Category:</label>
-        <select name="category" id="category">
-            <option value="">All</option>
-            <option value="decor">Decor</option>
-            <option value="bathroom">Bathroom</option>
-            <option value="clothing">Clothing</option>
-            <option value="furniature">Furniature</option>
-            <option value="appliance">Appliance</option>
-            <option value="kitchen">Kitchen</option>
-            <option value="other">Other</option>
-        </select>
-
-        <label for="min_price">Min Price:</label>
-        <input type="number" name="min_price" id="min_price" step="0.01">
-
-        <label for="max_price">Max Price:</label>
-        <input type="number" name="max_price" id="max_price" step="0.01">
-
-        <label>Condition:</label>
-        <input type="checkbox" name="condition" value="Brand_new" id="brand_new"><label for="brand_new">Brand New</label>
-        <input type="checkbox" name="condition" value="Like_new" id="like_new"><label for="like_new">Like New</label>
-        <input type="checkbox" name="condition" value="Very_good" id="very_good"><label for="very_good">Very Good</label>
-        <input type="checkbox" name="condition" value="Good" id="good"><label for="good">Good</label>
-        <input type="checkbox" name="condition" value="Acceptable" id="acceptable"><label for="acceptable">Acceptable</label>
-        <input type="checkbox" name="condition" value="Damaged" id="damaged"><label for="damaged">Damaged</label>
-
-        <button type="submit">Filter</button>
+<h1>Swap-UR</h1>
+  <filter>
+    <form method="get" action="/">
+      <select name="category">
+        <option value="">All Categories</option>
+        <option value="decor">Decor</option>
+        <option value="bathroom">Bathroom</option>
+        <option value="clothing">Clothing</option>
+        <option value="furniature">Furniature</option>
+        <option value="appliance">Appliance</option>
+        <option value="kitchen">Kitchen</option>
+        <option value="other">Other</option>
+      </select>
+      <select name="condition">
+        <option value="">All Item Conditions</option>
+        <option value="brand_new">Brand New</option>
+        <option value="like_new">Like New</option>
+        <option value="very_good">Very Good</option>
+        <option value="good">Good</option>
+        <option value="acceptable">Acceptable</option>
+        <option value="damaged">Damaged</option>
+      </select>
+      <select name="price">
+        <option value="">All Prices Range</option>
+        <option value="0-10">$0 - $10</option>
+        <option value="10-50">$10 - $50</option>
+        <option value="50-100">$50 - $100</option>
+        <option value="100+">$100+</option>
+      </select>
+      <select name="payment">
+        <option value="">All Payment Types</option>
+        <option value="cash">Cash</option>
+        <option value="paypal">Paypal</option>
+        <option value="venmo">Venmo</option>
+      </select>
+      <button type="submit">Filter</button>
     </form>
-
-    {% if items %}
-        {% for item in items %}
-            <div class="item">
-                <img src="{{ url_for('static', filename='images/' + item.img_1) }}" alt="{{ item.name }}">
-                <h2>{{ item.name }}</h2>
-                <p>{{ item.description }}</p>
-                <p>{{ item.price }}</p>
-                <a href="{{ url_for('item.html', id=item.i_id) }}">Get Now</a>
-            </div>
-        {% endfor %}
-    {% else %}
-        <p>No items found.</p>
-    {% endif %}
+</filter>
+<div class="item-grid">
+  <ul>
+    {% for item in items %}
+    <div class="item-card">
+    <li>
+      <a href="{{ url_for('item', item_id=item.i_id) }}">
+        <img src="{{ url_for('static', filename=item.img_1_path) }}" alt="{{ item.name }}">
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.description }}</p>
+        <p>Price: ${{ item.price }}</p>
+        <p>Condition: {{ item.condition }}</p>
+        <p>Listed on: {{ item.listing_datetime.strftime('%Y-%m-%d') }}</p>
+      </a>
+    </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}
