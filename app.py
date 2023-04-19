@@ -43,7 +43,22 @@ class Item(db.Model):
 
 @app.route('/')
 def main():
-    return render_template('main.html')
+    category = request.args.get('category', '')
+    condition = request.args.get('condition', '')
+    price_range = request.args.get('price', '')
+    items = Item.query.all()
+
+    if category:
+        items = [item for item in items if item.item_category == category]
+    if condition:
+        items = [item for item in items if item.condition == condition]
+    if price_range:
+        prices = price_range.split('-')
+        if len(prices) == 2:
+            min_price, max_price = float(prices[0]), float(prices[1])
+            items = [item for item in items if min_price <= item.price <= max_price]
+            
+    return render_template('main.html', items=items)
 
 @app.route('/item')
 def item():
