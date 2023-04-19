@@ -1,53 +1,50 @@
-<div class="seller-profile py-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent text-center">
-            <img class="profile_img" src="https://www.shutterstock.com/image-vector/bearded-man-face-male-generic-260nw-2140768413.jpg">
-            <h3>name</h3>
-          </div>
-          <div class="card-body">
-            <p class="mb-0"><strong class="pr-1">UR ID:</strong>netID</p>
-            <p class="mb-0"><strong class="pr-1">Class Year</strong>3</p>
-          </div>
-        </div>
+
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Swap-UR</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+      .square-container {
+        border: 5px solid #ccc; /* set the border style */
+        padding: 15px; /* set the padding */
+        display: inline-block; /* make the container wrap its contents */
+      }
+    </style>
+    
+</head>
+
+<body>
+  <div class="square-container">
+      <div class="image-container">
+        <img src="https://www.shutterstock.com/image-vector/bearded-man-face-male-generic-260nw-2140768413.jpg" alt="Image description">
       </div>
-      <div class="col-lg-8">
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>General Information</h3>
-          </div>
-          <div class="card-body pt-0">
-            <table class="table table-bordered">
-              <tr>
-                <th width="30%">Something1	</th>
-                <td width="2%">:</td>
-                <td>2020</td>
-              </tr>
-              <tr>
-                <th width="30%">Something2</th>
-                <td width="2%">:</td>
-                <td>Male</td>
-              </tr>
-              <tr>
-                <th width="30%">something3</th>
-                <td width="2%">:</td>
-                <td>Group</td>
-              </tr>
-            </table>
-          </div>
-        </div>
-          <div style="height: 26px"></div>
-        <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Other Information</h3>
-          </div>
-          <div class="card-body pt-0">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </div>
-        </div>
+    <div class="card-body">
+      <p class="mb-0"><strong class="pr-1">Name: </strong>Abcd</p>
+      <p class="mb-0"><strong class="pr-1">UR ID: </strong>netID</p>
+      <p class="mb-0"><strong class="pr-1">Email address: </strong>example@example.com</p>
+      <p class="mb-0"><strong class="pr-1"> </strong> </p>
+      <p class="mb-0"><strong class="pr-1"> </strong> </p>
+      <div class="rating-display">
+        <i class="fas fa-star filled"></i>
+        <i class="fas fa-star filled"></i>
+        <i class="fas fa-star filled"></i>
+        <i class="fas fa-star-half-alt filled"></i>
+        <i class="fas fa-star"></i>
       </div>
+    </div> 
     </div>
-  </div>
-</div>
+
+    <nav>
+      <a href="{{ url_for('main') }}">back</a>
+  </nav>
+
+</body>
+</html>
+{% endblock %}
