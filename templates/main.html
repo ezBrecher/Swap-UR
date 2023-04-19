@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Swap-UR</h1>
-  <filter>
+  <nav>
     <form method="get" action="/">
       <select name="category">
         <option value="">All Categories</option>
@@ -12,10 +11,11 @@
         <option value="furniature">Furniature</option>
         <option value="appliance">Appliance</option>
         <option value="kitchen">Kitchen</option>
+        <option value="school-supplies">School Supplies</option>
         <option value="other">Other</option>
       </select>
       <select name="condition">
-        <option value="">All Item Conditions</option>
+        <option value="">All Conditions</option>
         <option value="brand_new">Brand New</option>
         <option value="like_new">Like New</option>
         <option value="very_good">Very Good</option>
@@ -24,37 +24,29 @@
         <option value="damaged">Damaged</option>
       </select>
       <select name="price">
-        <option value="">All Prices Range</option>
+        <option value="">All Prices</option>
         <option value="0-10">$0 - $10</option>
         <option value="10-50">$10 - $50</option>
         <option value="50-100">$50 - $100</option>
         <option value="100+">$100+</option>
       </select>
-      <select name="payment">
-        <option value="">All Payment Types</option>
-        <option value="cash">Cash</option>
-        <option value="paypal">Paypal</option>
-        <option value="venmo">Venmo</option>
-      </select>
       <button type="submit">Filter</button>
     </form>
-</filter>
-<div class="item-grid">
+  </nav>
+  <h1>Swap-UR</h1>
   <ul>
     {% for item in items %}
-    <div class="item-card">
+
     <li>
       <a href="{{ url_for('item', item_id=item.i_id) }}">
-        <img src="{{ url_for('static', filename=item.img_1_path) }}" alt="{{ item.name }}">
+        <img src="{{ url_for('static', filename='{{ item.img_1_path }}') }}" alt="{{ item.name }}">
         <h2>{{ item.name }}</h2>
         <p>{{ item.description }}</p>
         <p>Price: ${{ item.price }}</p>
         <p>Condition: {{ item.condition }}</p>
         <p>Listed on: {{ item.listing_datetime.strftime('%Y-%m-%d') }}</p>
       </a>
-    </div>
     </li>
     {% endfor %}
   </ul>
-</div>
 {% endblock %}

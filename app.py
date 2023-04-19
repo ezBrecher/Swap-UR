@@ -146,7 +146,7 @@ def profile():
 
 @app.route('/confirmation')
 def confirmation():
-    id = 1
+    id = 2
     item = Item.query.filter_by(i_id=id).first()
     if item:
         if item.sold == True:
