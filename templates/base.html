@@ -8,12 +8,13 @@
   </head>
   <body>
     <nav>
-      <a href="{{ url_for('item') }}">Item</a>
       <a href="{{ url_for('main') }}">Main</a>
+      <a href="{{ url_for('item') }}">Item</a>
       <a href="{{ url_for('listing') }}">Listing</a>
       <a href="{{ url_for('profile') }}">Profile</a>
       <a href="{{ url_for('confirmation') }}">Confirmation</a>
       <a href="{{ url_for('login') }}">Login</a>
+      <img class="pull-right" src="static/SwapURLogo.png" width="110px" height="50px" id="logo"/>
     </nav>
     {% block content %}
     {% endblock %}
