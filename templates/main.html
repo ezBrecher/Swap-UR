@@ -39,8 +39,10 @@
       <button type="submit">Filter</button>
     </form>
 </filter>
+<div class="item-grid">
   <ul>
     {% for item in items %}
+    <div class="item-card">
     <li>
       <a href="{{ url_for('item', item_id=item.i_id) }}">
         <img src="{{ url_for('static', filename='uploads/item.jpg') }}" alt="{{ item.name }}">
@@ -50,7 +52,9 @@
         <p>Condition: {{ item.condition }}</p>
         <p>Listed on: {{ item.listing_datetime.strftime('%Y-%m-%d') }}</p>
       </a>
+    </div>
     </li>
     {% endfor %}
   </ul>
+</div>
 {% endblock %}
