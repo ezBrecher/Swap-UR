@@ -134,12 +134,16 @@ nav {
 	max-width: 100%;
 	max-height: 200px;
 	margin-bottom: 10px;
+	justify-content: center;
+	align-items: center;
   }
   
   .item-card h2 {
 	font-size: 16px;
 	font-weight: bold;
 	margin: 10px 0;
+	justify-content: center;
+	align-items: center;
   }
   
   .item-card p {
